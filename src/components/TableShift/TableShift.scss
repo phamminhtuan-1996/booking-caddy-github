@@ -1,0 +1,11 @@
+.table-shift {
+    background-color: #F3F2F7;
+    &__header {
+        height: 55px;
+        background-color: #F3F2F7;
+        &--item span {
+            font-weight: 500;
+            font-size: 16px;
+        }
+    }
+}

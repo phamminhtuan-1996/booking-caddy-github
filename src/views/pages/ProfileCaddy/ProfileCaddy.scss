@@ -1,0 +1,18 @@
+.profile-caddy {
+    padding: 18px 18px 90px 18px;
+    &__avatar {
+        width: calc(100vw - 138px);
+    }
+    &__title-info {
+        font-size: 18px;
+    }
+    &__table {
+        &--row {
+            margin: 30px 0;
+        }
+    }
+    &__code {
+        font-size: 26px;
+        margin: 30px 0;
+    }
+}

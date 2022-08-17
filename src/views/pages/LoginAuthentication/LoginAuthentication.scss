@@ -1,0 +1,30 @@
+.login-auth {
+    &__img {
+        margin-bottom: 82px;
+    }
+    &__title {
+        margin-bottom: 40px;
+        &--warning {
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+    &__wrap {
+        padding: 0 20px;
+        ::v-deep .input-form {
+            margin-bottom: 40px;
+        }
+    }
+    &__forgot {
+        margin-top: 52px;
+        &--label {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        &--link {
+            font-size: 18px;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+    }
+}

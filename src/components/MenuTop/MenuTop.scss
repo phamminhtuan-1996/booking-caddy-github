@@ -1,0 +1,59 @@
+.menu-top {
+    height: 73px;
+    &.active {
+        .menu-top__list {
+            visibility: visible;
+        }
+        .menu-top__purdah {
+            visibility: visible;
+        }
+    }
+    &__navigation {
+        padding: 19px 0;
+        &--button {
+            width: 40px;
+            height: 36px;
+            padding: 0;
+            margin-left: 14px;
+        }
+        &--button i {
+            font-size: 22px;
+        }
+    }
+    &__list {
+        width: calc(50vw + 22px);
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 1030;
+        visibility: hidden;
+        &--item {
+            margin: 38px 0 38px 22px;
+            i {
+                margin-right: 12px;
+            }
+        }
+        .item-avatar {
+            margin-right: 12px;
+        }
+    }
+    &__purdah {
+        content: "";
+        display: block;
+        visibility: hidden;
+        width: 50vw;
+        height: 100vh;
+        background-color: #000000b8;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 1029;
+        cursor: pointer;
+    }
+    
+}
+::v-deep .ez-dropdown {
+    .dropdown-toggle {
+        width: 100%;
+    }
+}

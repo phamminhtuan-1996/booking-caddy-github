@@ -1,0 +1,15 @@
+.list-table-shift {
+    padding: 40px 0px 90px 0px;
+}
+.list-button {
+    i::before {
+        color: white;
+    }
+}
+.fillter-search {
+    &__list {
+        &--item {
+            margin: 40px 0;
+        }
+    }
+}

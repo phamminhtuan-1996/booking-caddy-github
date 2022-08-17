@@ -1,0 +1,7 @@
+@import '@/bootstrap/scss/bootstrap.scss';
+.modal-box {
+    ::v-deep .modal-header {
+        height: 48px;
+        background-color: $secondary;
+    }
+}

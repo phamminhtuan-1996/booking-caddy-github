@@ -1,0 +1,25 @@
+.ez-dropdown {
+    &__title {
+        color: black;
+    }
+    ::v-deep .dropdown-menu {
+        width: 100%;
+        padding: 0;
+    }
+    ::v-deep .dropdown-toggle {
+        width: 100%;
+        overflow: hidden;
+    }
+    &__title {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    ::v-deep .dropdown-item {
+        padding: 16px 16px;
+        border: solid #B9B9B9;
+        border-width: 0 0 1px 0;
+        white-space: normal;
+    }
+}

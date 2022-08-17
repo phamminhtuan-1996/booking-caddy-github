@@ -1,0 +1,28 @@
+.success-add-bdc {
+    padding: 18px 18px 90px 18px;
+    &__code {
+        font-size: 26px;
+    }
+    &__alert {
+        font-size: 26px;
+    }
+    &__title-info {
+        font-size: 18px;
+    }
+    &__title-info{
+        margin-top: 102px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    &__table {
+        &--row {
+            margin: 27px 0;
+        }
+    }
+    .row-value {
+        text-align: right;
+    }
+    .row-label {
+        text-align: right;
+    }
+}
