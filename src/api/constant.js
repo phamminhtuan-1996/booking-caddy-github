@@ -1,4 +1,4 @@
-export const URL = 'nothing';
+export const URL = 'https://test.ezgolf.vn';
 export const RAW_JSON =  { 
     headers: {
         'Content-Type': 'application/json; charset=utf-8'

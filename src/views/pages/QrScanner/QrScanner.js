@@ -34,7 +34,7 @@ export default {
                 routes.push('/reject');
             } else {
                 store.commit('STATES_ADD_BOOKING_ID_DETAILS', res.data.Data.BookingDetailId);
-                routes.push('/sucess');
+                routes.push(`/sucess/${res.data.Data.BookingDetailId}`);
             }
         },
 

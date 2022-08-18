@@ -15,8 +15,8 @@ import MenuTop from '@/components/MenuTop/MenuTop.vue';
 import NavigationBottom from '@/components/NavigationBottom/NavigationBottom.vue';
 import defaultPush from 'push.js';
 // import PushFCM from 'pushjs-fcm';
-import { initializeApp } from "firebase/app";
-import { register } from 'register-service-worker';
+// import { initializeApp } from "firebase/app";
+// import { register } from 'register-service-worker';
 // import { firebaseMessaging } from 'firebase/messaging';
 
 export default {
@@ -35,18 +35,18 @@ export default {
     const stores = store; 
     const router = routes;
     // const messaging = firebaseMessaging;
-    const firebaseConfig = {
-        apiKey: "AIzaSyDyomrzDuEyL9ng4th7_n50FodYEXv0sOw",
-        authDomain: "noftication-push.firebaseapp.com",
-        databaseURL: "https://noftication-push-default-rtdb.firebaseio.com",
-        projectId: "noftication-push",
-        storageBucket: "noftication-push.appspot.com",
-        messagingSenderId: "149012720189",
-        appId: "1:149012720189:web:d928ed4e1482e103121854"
-      };
-    const app = initializeApp(firebaseConfig);
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyDyomrzDuEyL9ng4th7_n50FodYEXv0sOw",
+    //     authDomain: "noftication-push.firebaseapp.com",
+    //     databaseURL: "https://noftication-push-default-rtdb.firebaseio.com",
+    //     projectId: "noftication-push",
+    //     storageBucket: "noftication-push.appspot.com",
+    //     messagingSenderId: "149012720189",
+    //     appId: "1:149012720189:web:d928ed4e1482e103121854"
+    //   };
+    // const app = initializeApp(firebaseConfig);
     // console.log(messaging);
-    console.log(app);
+    // console.log(app);
     return {
         stores,
         router,
@@ -65,22 +65,22 @@ export default {
         }  
       });
     },
-    serviceWorker() {
-      register('firebase-messaging-sw.js');
-      if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('firebase-messaging-sw.js')
-            .then(reg => {
-              console.log(`Service Worker Registration (Scope: ${reg.scope})`);
-            })
-            .catch(error => {
-              const msg = `Service Worker Error (${error})`;
-              console.error(msg);
-            });
-        } else {
-          // happens when the app isn't served over HTTPS or if the browser doesn't support service workers
-          console.warn('Service Worker not available');
-        }
-    }
+    // serviceWorker() {
+    //   register('firebase-messaging-sw.js');
+    //   if ('serviceWorker' in navigator) {
+    //       navigator.serviceWorker.register('firebase-messaging-sw.js')
+    //         .then(reg => {
+    //           console.log(`Service Worker Registration (Scope: ${reg.scope})`);
+    //         })
+    //         .catch(error => {
+    //           const msg = `Service Worker Error (${error})`;
+    //           console.error(msg);
+    //         });
+    //     } else {
+    //       // happens when the app isn't served over HTTPS or if the browser doesn't support service workers
+    //       console.warn('Service Worker not available');
+    //     }
+    // }
   },
   computed: {
     stateLogin() {
@@ -97,7 +97,7 @@ export default {
         store.commit('STATES_LOGIN', false);
         routes.push('/');
       }
-      this.serviceWorker();
+      // this.serviceWorker();
   }
 }
 </script>

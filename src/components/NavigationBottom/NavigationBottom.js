@@ -56,20 +56,25 @@ export default {
                 const EndTimeHours = Number(arrayShiftToday[index].EndTime.split(':')[0]);
                 const StartTimeMinutes = Number(arrayShiftToday[index].StartTime.split(':')[1]);
                 const EndTimeMinutes = Number(arrayShiftToday[index].EndTime.split(':')[1]);
-                if (timeComputerHours >= StartTimeHours && timeComputerHours <= EndTimeHours && timeComputerMinutes >= StartTimeMinutes && timeComputerMinutes <= EndTimeMinutes) {
+                const minTimeHours = timeComputerHours >= StartTimeHours;
+                const maxTimeHours = timeComputerHours <= EndTimeHours;
+                const maxTimeMinute = timeComputerMinutes <= EndTimeMinutes;
+                if (minTimeHours && maxTimeHours && timeComputerMinutes >= StartTimeMinutes && maxTimeMinute) {
                     result = arrayShiftToday[index];
                     break;
                 }
-                if (timeComputerHours >= StartTimeHours && timeComputerHours <= EndTimeHours && timeComputerMinutes < StartTimeMinutes  && timeComputerMinutes <= EndTimeMinutes) {
+                if (minTimeHours && maxTimeHours && timeComputerMinutes < StartTimeMinutes  && maxTimeMinute) {
+                    console.log(2);
                     result = arrayShiftToday[index];
                     break;
                 }
-                if (timeComputerHours >= StartTimeHours && timeComputerHours <= EndTimeMinutes && timeComputerMinutes <= StartTimeMinutes  && timeComputerMinutes <= EndTimeMinutes) {
+                if (minTimeHours && timeComputerHours <= EndTimeMinutes && timeComputerMinutes <= StartTimeMinutes  && maxTimeMinute) {
                     result = arrayShiftToday[index];
                     break;
                 }
                 if (timeComputerHours == EndTimeHours && timeComputerMinutes > EndTimeMinutes) {
-                    result = arrayShiftToday[index + 1];
+                    const plusIndex = index + 1;
+                    result = arrayShiftToday[plusIndex];
                     break;
                 }
                 if (timeComputerHours < StartTimeHours && timeComputerHours < EndTimeHours) {
@@ -143,7 +148,7 @@ export default {
                 routes.push('/reject');
             } else {
                 store.commit('STATES_ADD_BOOKING_ID_DETAILS', res.data.Data.BookingDetailId);
-                routes.push('/sucess');
+                routes.push(`/sucess/${res.data.Data.BookingDetailId}`);
             }
         }
 

@@ -11,7 +11,7 @@ import ProfileCaddy from '@/views/pages/ProfileCaddy/ProfileCaddy.vue';
 Vue.use(Router)
 
 export default new Router({
-  routes: [
+   routes: [
     {
       path: '/', 
       name: 'LoginAuthentication',
@@ -23,7 +23,7 @@ export default new Router({
       component: ListTableShift
     },
     {
-      path: '/sucess',
+      path: '/sucess/:id',
       name: 'Success',
       component: SuccessAddBdc
     },
@@ -44,3 +44,5 @@ export default new Router({
     },
   ],
 })
+
+

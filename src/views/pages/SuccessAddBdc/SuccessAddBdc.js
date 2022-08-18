@@ -26,7 +26,7 @@ export default {
             const param = {
                 token: localStorage.getItem('AccessToken'),
                 lang: '1000000',
-                Id: this.stores.state.bookingDetailsId,
+                Id: Number(this.$route.params.id),
             };
             this.infoBookingDetails = await fetchBookingDetails(param);
             this.workingDay = convertDateToVN(this.infoBookingDetails.data.Data.Booking.BookingDetail.OpenDate);

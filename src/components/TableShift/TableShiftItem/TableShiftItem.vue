@@ -26,7 +26,7 @@
             <b-row class="row-item w-100">
                 <b-col cols="4" sm="4" class="p-0"></b-col>
                 <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-label">{{ $t('time_line') }}:</span></b-col>
-                <b-col cols="4" sm="4" class="p-0 text-left">
+                <b-col cols="4" sm="4" class="p-0 text-left d-flex align-items-end">
                     <span
                         class="row-value"
                         :class="{
@@ -54,6 +54,7 @@
                     >
                         <i class="ezGolf-icon-plus-circle mr-2"></i> {{ $t('add_bdc_code') }}
                     </b-button>
+                    <router-link  v-if="item.BDC" :to="'/sucess/'+item.idbookingDetails" class="btn btn-primary w-100 mt-3">{{ $t('view_details') }}</router-link>
                 </b-col>
             </b-row>
         </b-collapse>

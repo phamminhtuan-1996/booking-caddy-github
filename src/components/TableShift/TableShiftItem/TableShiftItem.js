@@ -24,6 +24,9 @@ export default {
             store.commit('STATES_SHOWMODAL_ADD_BDC', true);
             this.$emit('DATA_BDC',item);
         },
+        redirectSuccess(item) {
+            this.$emit('REDIRECT_DETAILS',item);
+        }
     },
     computed: {
         isNotBDC() {
@@ -34,7 +37,7 @@ export default {
         },
         checkNotBDC() {
             return this.item.BDC === null && this.item.TimeLine !== 'PAST';
-        }
+        },
     },
     watch: {
         visibleCollapse: function(value) {

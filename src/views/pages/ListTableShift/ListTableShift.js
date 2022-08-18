@@ -94,6 +94,17 @@ export default {
             });
         },
 
+        async fetchIdBookingDetails(value) {
+            const param = {
+                token: localStorage.getItem('AccessToken'),
+                Lang: '1000000',
+                BDC: value.bdc,
+                CaddyCalendarDetailId: value.idShift
+            }
+            const res = await fetchBookingDetailsId(param);
+            return res.data.Data.BookingDetailId;
+        },
+
         async pickValueDate(date) {
             const accessToken = localStorage.getItem('AccessToken');
             this.dataDate = date;
@@ -108,13 +119,13 @@ export default {
             if (res.data.Status === '200') {
                 this.arrayDataList = [];
                 this.arrayDataList = [...res.data.Data.Shift];
-                this.arrayDataList.map((item) => {
+                this.arrayDataList.map(async (item) => {
                     item.WorkingDay = convertDateToVN(item.WorkingDay);
                     item.StartTime = convertTimeToVn(item.StartTime).all;
                     item.EndTime = convertTimeToVn(item.EndTime).all;
-                    if(item.CourseName !== null) {
-                        item.CourseName = item.CourseName.toString();
-                    }
+                    item.CourseName = item.CourseName !== null ? item.CourseName.toString() : '';
+                    const idBooking = await this.fetchIdBookingDetails({bdc: item.BDC, idShift: item.Id});
+                    item['idbookingDetails'] = item.BDC ? idBooking : null;
                 });
                 this.statisticalShift();
                 store.commit('STATE_SHIFT', this.arrayDataList);
@@ -165,7 +176,7 @@ export default {
                 routes.push('/reject');
             } else {
                 store.commit('STATES_ADD_BOOKING_ID_DETAILS', res.data.Data.BookingDetailId);
-                routes.push('/sucess');
+                routes.push(`/sucess/${res.data.Data.BookingDetailId}`);
             }
         },
 

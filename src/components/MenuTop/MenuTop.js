@@ -86,7 +86,6 @@ export default {
         },
         changeLanguage(value) {
            localStorage.setItem('systemLanguage', value);
-           console.log(localStorage.getItem('systemLanguage'));
            i18n.locale = value;
         }
     },
