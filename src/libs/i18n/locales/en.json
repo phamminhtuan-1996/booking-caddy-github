@@ -47,5 +47,6 @@
   "pants_size": "Pants size",
   "username": "Username",
   "password": "Password",
-  "view_details": "View details"
+  "view_details": "View details",
+  "id_caddy_null": "The Accounts not being started with Caddy"
 }

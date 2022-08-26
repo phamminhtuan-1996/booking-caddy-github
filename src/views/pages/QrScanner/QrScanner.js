@@ -22,12 +22,9 @@ export default {
     methods: {
 
        async acceptData() {
-            const accessToken = localStorage.getItem('AccessToken');
             const param = {
-                token: accessToken,
-                Lang: '1000000',
-                CaddyCalendarDetailId: this.stores.state.idInputAddBdc,
-                BDC: this.qrCodeResult
+                'CaddyCalendarDetailId': this.stores.state.idInputAddBdc,
+                'BDC': this.qrCodeResult
             }
             const res = await fetchBookingDetailsId(param);
             if (res.data.Data == null) {

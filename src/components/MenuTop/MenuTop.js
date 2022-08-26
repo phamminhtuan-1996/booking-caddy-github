@@ -43,10 +43,11 @@ export default {
         },
 
         async callSiteName() {
+            if (this.getObjectToken === null) {
+                return;
+            }
             const param = {
-                token: this.getObjectToken.token,
-                lang: '1000000',
-                username: this.getObjectToken.username
+                'UserName': this.getObjectToken.username
             };
             const fetchSiteNameData = await fetchSiteName(param);
             this.dataSite = [...fetchSiteNameData.data.Data.Site];
@@ -59,9 +60,7 @@ export default {
 
         async acceptPickSiteName() {
             const param = {
-                token: localStorage.getItem('AccessToken'),
-                Lang: '1000000',
-                SiteId: this.dataPickMenuDropdown.SiteId
+                'SiteId': this.dataPickMenuDropdown.SiteId
             };
             const resSiteNamePicked = await switchSiteName(param);
             localStorage.setItem('AccessToken', resSiteNamePicked.data.Data.AccessToken);

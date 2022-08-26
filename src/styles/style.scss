@@ -48,3 +48,8 @@
 .modal-title {
   text-transform: uppercase;
 }
+i.text-white {
+  &::before {
+    color: $white;
+  }
+}

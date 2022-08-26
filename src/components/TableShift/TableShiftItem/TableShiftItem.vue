@@ -15,17 +15,17 @@
         <b-collapse v-model="visible" :id="'collapse-'+idCollapse" class="mt-2 w-100">
             <b-row class="row-item w-100">
                 <b-col cols="4" sm="4" class="p-0"></b-col>
-                <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-label">{{ $t('bdc_code') }}:</span></b-col>
+                <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-label">{{ $t('golf_webapp_caddy_bdc_code') }}:</span></b-col>
                 <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-value">{{ item.BDC || '-' }}</span></b-col>
             </b-row>
             <b-row class="row-item w-100">
                 <b-col cols="4" sm="4" class="p-0"></b-col>
-                <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-label">{{ $t('golf_course') }}:</span></b-col>
+                <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-label">{{ $t('golf_webapp_caddy_golf_course') }}:</span></b-col>
                 <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-value">{{item.CourseName || '-'}}</span></b-col>
             </b-row>
             <b-row class="row-item w-100">
                 <b-col cols="4" sm="4" class="p-0"></b-col>
-                <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-label">{{ $t('time_line') }}:</span></b-col>
+                <b-col cols="4" sm="4" class="p-0 text-left"><span class="row-label">{{ $t('golf_webapp_caddy_time_line') }}:</span></b-col>
                 <b-col cols="4" sm="4" class="p-0 text-left d-flex align-items-end">
                     <span
                         class="row-value"
@@ -52,9 +52,9 @@
                         variant="primary"
                         @click="showModalAddBdc(item)"
                     >
-                        <i class="ezGolf-icon-plus-circle mr-2"></i> {{ $t('add_bdc_code') }}
+                        <i class="ezGolf-icon-plus-circle mr-2"></i> {{ $t('golf_webapp_caddy_add_bdc_code') }}
                     </b-button>
-                    <router-link  v-if="item.BDC" :to="'/sucess/'+item.idbookingDetails" class="btn btn-primary w-100 mt-3">{{ $t('view_details') }}</router-link>
+                    <router-link  v-if="item.BDC" :to="'/sucess/'+item.idbookingDetails" class="btn btn-primary w-100 mt-3">{{ $t('golf_webapp_caddy_view_details') }}</router-link>
                 </b-col>
             </b-row>
         </b-collapse>

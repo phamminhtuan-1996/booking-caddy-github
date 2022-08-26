@@ -47,5 +47,6 @@
   "pants_size": "Kích cỡ Quần",
   "username": "Username",
   "password": "Mật khẩu",
-  "view_details": "Xem chi tiết"
+  "view_details": "Xem chi tiết",
+  "id_caddy_null": "Tài khoản chưa được gán với Caddy"
 }

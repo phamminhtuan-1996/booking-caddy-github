@@ -1,7 +1,6 @@
 import routes from '@/router/index.js';
 import store from '@/store/store.js';
-import { 
-    convertDateToVN, 
+import {
     getTimeComputer 
 } from '@/helper/helper.js'
 import ModalBox from '@/components/ModalBox/ModalBox.vue';
@@ -59,26 +58,33 @@ export default {
                 const minTimeHours = timeComputerHours >= StartTimeHours;
                 const maxTimeHours = timeComputerHours <= EndTimeHours;
                 const maxTimeMinute = timeComputerMinutes <= EndTimeMinutes;
+               
                 if (minTimeHours && maxTimeHours && timeComputerMinutes >= StartTimeMinutes && maxTimeMinute) {
                     result = arrayShiftToday[index];
                     break;
                 }
                 if (minTimeHours && maxTimeHours && timeComputerMinutes < StartTimeMinutes  && maxTimeMinute) {
-                    console.log(2);
                     result = arrayShiftToday[index];
                     break;
                 }
-                if (minTimeHours && timeComputerHours <= EndTimeMinutes && timeComputerMinutes <= StartTimeMinutes  && maxTimeMinute) {
+                if (minTimeHours && timeComputerHours <= EndTimeHours && timeComputerMinutes <= StartTimeMinutes  && maxTimeMinute) {
                     result = arrayShiftToday[index];
                     break;
                 }
                 if (timeComputerHours == EndTimeHours && timeComputerMinutes > EndTimeMinutes) {
-                    const plusIndex = index + 1;
-                    result = arrayShiftToday[plusIndex];
+                    result = arrayShiftToday[index + 1];
                     break;
                 }
                 if (timeComputerHours < StartTimeHours && timeComputerHours < EndTimeHours) {
                     result = arrayShiftToday[0];
+                    break;
+                }
+                if (timeComputerHours >= StartTimeHours && timeComputerHours <= EndTimeHours) {
+                    result = arrayShiftToday[index];
+                    break;
+                }
+                if (timeComputerHours > StartTimeHours && timeComputerHours > EndTimeHours) {
+                    result = arrayShiftToday[arrayShiftToday.length - 1];
                     break;
                 }
             }
@@ -88,6 +94,9 @@ export default {
         showModalAddBdcNav() {
             store.commit('STATES_SHOWMODAL_ADD_BDC_QR', true);
             this.dataListShift = [...this.stores.state.arrayListShift];
+            if (this.dataListShift.length == 0) {
+                return;
+            }
             const sortDataToDay = this.sortShiftToDayBDCNull();
             this.objectPick = this.sortTimeTodayFirst(sortDataToDay);
             this.resultPickTime = { 
@@ -101,7 +110,7 @@ export default {
 
         pickMenuDropdown(value) {
             this.resultPickTime = { 
-                name: convertDateToVN(value.WorkingDay),
+                name: value.WorkingDay,
                 StartTime: value.StartTime,
                 EndTime: value.EndTime,
                 id: value.Id,
@@ -136,18 +145,16 @@ export default {
         },
 
         async acceptData() {
-            const accessToken = localStorage.getItem('AccessToken');
             const param = {
-                token: accessToken,
-                Lang: '1000000',
-                BDC: this.pickBDC,
-                CaddyCalendarDetailId: this.resultPickTime.id
+                'BDC': this.pickBDC,
+                'CaddyCalendarDetailId': this.resultPickTime.id
             };
             const res = await fetchBookingDetailsId(param);
             if(res.data.Data == null) {
                 routes.push('/reject');
             } else {
                 store.commit('STATES_ADD_BOOKING_ID_DETAILS', res.data.Data.BookingDetailId);
+                store.commit('STATES_SHOWMODAL_ADD_BDC_QR', false);
                 routes.push(`/sucess/${res.data.Data.BookingDetailId}`);
             }
         }

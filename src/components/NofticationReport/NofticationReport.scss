@@ -1,0 +1,31 @@
+@import '@/bootstrap/scss/bootstrap.scss';
+
+.noftication-report {
+    ::v-deep .noftication-item {
+        width: calc(100% - 10px)!important;
+        transition: 0.5s;
+        animation: autoPush 0.3s forwards;
+        &.remove {
+            animation: autoPushOff 0.3s forwards;
+        }
+        &__title-nof {
+            color: $danger;
+        }
+    }
+}
+@keyframes autoPush {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+@keyframes autoPushOff {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}

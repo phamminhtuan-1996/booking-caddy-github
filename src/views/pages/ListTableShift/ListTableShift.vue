@@ -7,11 +7,11 @@
             variant="primary"
             class="w-100 my-5"
         >
-            {{ $t('search') }}
+            {{ $t('golf_webapp_caddy_search') }}
         </b-button>
     </section>
     <section class="fillter-search px-3">
-        <h1 class="text-uppercase w-100 text-primary">{{ $t('title_list_table_shift') }}</h1>
+        <h1 class="text-uppercase w-100 text-primary">{{ $t('golf_webapp_caddy_title_list_table_shift') }}</h1>
         <ul class="fillter-search__list list-unstyled">
 
             <li class="fillter-search__list--item">
@@ -20,7 +20,7 @@
                     v-b-toggle="listCollapseStatistical.today"
                     class="text-uppercase w-100"
                 >
-                    {{ $t('today') }} :
+                    {{ $t('golf_webapp_caddy_today') }} :
                 <span class="text-success">{{ numberStatistical.today }}</span></b-button>
             </li>
             <li class="fillter-search__list--item">
@@ -29,7 +29,7 @@
                     variant="outline-primary"
                     class="text-uppercase w-100"
                 >
-                    {{ $t('complete') }}: 
+                    {{ $t('golf_webapp_caddy_complete') }}: 
                     <span class="text-success">
                         {{ numberStatistical.success }}
                     </span>
@@ -41,7 +41,7 @@
                     variant="outline-primary" 
                     class="text-uppercase w-100"
                 >
-                    {{ $t('booked') }}: 
+                    {{ $t('golf_webapp_caddy_booked') }}: 
                     <span class="text-info">
                         {{ numberStatistical.hasBooking }}
                     </span>
@@ -53,7 +53,7 @@
                     variant="outline-primary" 
                     class="text-uppercase w-100"
                 >
-                    {{ $t('serving') }}: 
+                    {{ $t('golf_webapp_caddy_serving') }}: 
                     <span class="text-danger">
                         {{ numberStatistical.serving }}
                     </span>
@@ -80,15 +80,15 @@
          <div v-if="showListButtonModal" class="list-button w-100 d-flex align-items-center">
             <b-button variant="primary" class="w-50" @click="inputBDC"> 
                 <i class="ezGolf-icon-file-text mr-1"></i> 
-                <span class="text-white text-uppercase">{{ $t('input_bdc') }}</span>
+                <span class="text-white text-uppercase">{{ $t('golf_webapp_caddy_input_bdc') }}</span>
             </b-button>
             <span class="px-3">|</span>
             <b-button variant="primary" class="w-50 d-flex justify-content-center align-items-center" @click="redirectQR">
                 <i class="ezGolf-icon-qrcode mr-1"></i>
-                <span class="text-white text-uppercase">{{ $t('qr_scanner') }}</span>
+                <span class="text-white text-uppercase">{{ $t('golf_webapp_caddy_qr_scanner') }}</span>
             </b-button>
          </div>
-         <input-form v-if="isShowInputBdc" @INPUT-VALUE="pickValueBdcCode" :placeholder="$t('bdc_code')" class="my-4"></input-form>
+         <input-form v-if="isShowInputBdc" @INPUT-VALUE="pickValueBdcCode" :placeholder="$t('golf_webapp_caddy_bdc_code')" class="my-4"></input-form>
     </modal-box>
 </section>
 </template>

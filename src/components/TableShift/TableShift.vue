@@ -3,8 +3,8 @@
         <section class="table-shift">
             <b-row class="table-shift__header w-100">
                 <b-col class="table-shift__header--item text-left p-0" cols="4" sm="4"></b-col>
-                <b-col class="table-shift__header--item text-left p-0 d-flex align-items-center" cols="4" sm="4"><span class="text-uppercase">{{ $t('date') }}</span></b-col>
-                <b-col class="table-shift__header--item text-left p-0 d-flex align-items-center" cols="4" sm="4"><span class="text-uppercase">{{ $t('shift') }}</span></b-col>
+                <b-col class="table-shift__header--item text-left p-0 d-flex align-items-center" cols="4" sm="4"><span class="text-uppercase">{{ $t('golf_webapp_caddy_date') }}</span></b-col>
+                <b-col class="table-shift__header--item text-left p-0 d-flex align-items-center" cols="4" sm="4"><span class="text-uppercase">{{ $t('golf_webapp_caddy_shift') }}</span></b-col>
             </b-row>
             <div class="table-shift__row">
             <table-shift-item
@@ -19,7 +19,7 @@
             
         </section>
         <section v-if="data.length == 0" class="mt-3">
-            <h1 class="text-uppercase text-secondary">{{ $t('shift_empty') }}</h1>
+            <h1 class="text-uppercase text-secondary">{{ $t('golf_webapp_caddy_shift_empty') }}</h1>
         </section>
     </section>
 </template>

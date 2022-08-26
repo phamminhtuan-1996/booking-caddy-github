@@ -11,6 +11,8 @@ const store = new Vuex.Store({
         arrayListShift: [],
         idInputAddBdc: 0,
         bookingDetailsId: 0,
+        messageText: '',
+        nofticationReport: {}
       },
       mutations: {
         STATES_LOGIN(state, val) {
@@ -30,6 +32,12 @@ const store = new Vuex.Store({
         },
         STATES_ADD_BOOKING_ID_DETAILS(state, val) {
           state.bookingDetailsId = val;
+        },
+        STATES_MESSAGE_PERMISSION(state, val) {
+          state.messageText = val;
+        },
+        STATES_MESSAGE_REPORT(state, val) {
+          state.nofticationReport = val;
         }
       },
       getters: {

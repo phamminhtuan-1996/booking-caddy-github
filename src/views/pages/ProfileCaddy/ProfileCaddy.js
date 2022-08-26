@@ -1,4 +1,3 @@
-import routes from '@/router/index.js';
 import { fetchDataProfileCaddy } from '@/api/service.js';
 import { convertDateToVN } from '@/helper/helper.js'
 
@@ -13,16 +12,16 @@ export default {
                 phoneNumber: '',
                 shirtSize: '',
                 pantsSize: '',
-                codeCaddy: ''
-            }
+                codeCaddy: '',
+                avatar: ''
+            },
+            avatarDefault: '@/assets/avatar-default.svg'
         };
     },
     methods: {
         async callBackDataProfile() {
             const param = {
-                Token: localStorage.getItem('AccessToken'),
-                Id: Number(localStorage.getItem('CaddyId')),
-                Lang: '1000000',
+                'Caddy': {'Id': Number(localStorage.getItem('CaddyId'))}
             }
             const res = await fetchDataProfileCaddy(param);
             if (res.data.Data !== null) {
@@ -33,8 +32,7 @@ export default {
                 this.dataProfile.shirtSize = res.data.Data.Caddy.ShirtSize;
                 this.dataProfile.pantsSize = res.data.Data.Caddy.PantsSize;
                 this.dataProfile.phoneNumber = res.data.Data.Caddy.PhoneNumber;
-            } else {
-                routes.push('/');
+                this.dataProfile.avatar = 'data:image/jpeg;base64,'+res.data.Data.Caddy.Avatar;
             }
         }
     },

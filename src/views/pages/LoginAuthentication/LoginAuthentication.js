@@ -9,14 +9,11 @@ import {
 import InputForm from '@/components/InputForm/InputForm.vue';
 import LoadingBackground from '@/components/LoadingBackground/LoadingBackground.vue'
 
-// import ModalBox from '@/components/ModalBox/ModalBox.vue';
-
 export default {
     name: 'LoginAuthentication',
     components: {
         InputForm,
         LoadingBackground,
-        // ModalBox
     },
     data(){
         return{
@@ -24,13 +21,15 @@ export default {
                 username: '',
                 password: '',
                 token: '',
-                site: []
+                site: [],
+                numberSite: 0
             },
+            siteNameLocal: localStorage.getItem('SiteId'),
             showSelectPickManage: false,
             valuePickSite: null,
             isShowLoading: false,
-            siteIdPick: '',
             isNotLogin: false,
+            textWarning: 'golf_webapp_caddy_incorrect_login',
         };
     },
     methods: {
@@ -48,47 +47,58 @@ export default {
                 UserName: this.dataLogin.username,
                 PassWord: this.dataLogin.password
             };
-            const resTokenLogin = await getTokenLogin(paramGetTokenLogin); 
-            if (resTokenLogin.data.Status === "200") {
+            const resTokenLogin = await getTokenLogin(paramGetTokenLogin);
+            if (resTokenLogin.data.Status === "200" || resTokenLogin.data.Status !== '400') {
                 this.dataLogin.token = resTokenLogin.data.Data.access_token;
+                localStorage.setItem('AccessToken', this.dataLogin.token);
                 localStorage.setItem('TOKEN_RAT01', JSON.stringify({ token: this.dataLogin.token, username: this.dataLogin.username }));
             } else {
                 this.isShowLoading = !this.isShowLoading;
-                this.isNotLogin = !this.isNotLogin;
+                this.isNotLogin = true;
+                this.textWarning = 'golf_webapp_caddy_incorrect_login';
             }
         },
 
         async getSiteName() {
             const param = {
-                token: this.dataLogin.token,
-                lang: '1000000',
-                username: this.dataLogin.username,
+                'UserName': this.dataLogin.username,
             };
             const resSiteName = await fetchSiteName(param);
             if (resSiteName.data.Status === '200') {
                 this.dataLogin.token = resSiteName.data.Data.AccessToken;
+                localStorage.setItem('AccessToken', this.dataLogin.token);
                 this.dataLogin.site = [...resSiteName.data.Data.Site];
-                const siteNameLocal = localStorage.getItem('SiteId');
-                this.siteIdPick = siteNameLocal == null ? this.dataLogin.site[0].SiteId : siteNameLocal;
             }
-
         },
 
         async pickSite() {
+            const idSite = this.siteNameLocal == null ? this.dataLogin.site[this.dataLogin.numberSite].SiteId : this.siteNameLocal;
             const param = {
-                token: this.dataLogin.token,
-                Lang: '1000000',
-                SiteId: this.siteIdPick
+                'SiteId': idSite
             };
             const res = await switchSiteName(param);
-            if (res.data.Status === '200') {
+            if (this.dataLogin.site.length < this.dataLogin.numberSite) {
+                const dataRemove = ['AccessToken', 'CaddyId', 'TOKEN_RAT01'];
+                dataRemove.forEach((item) => localStorage.removeItem(item));
+                this.isNotLogin = true;
+                this.textWarning = 'golf_webapp_caddy_id_caddy_null';
+                this.isShowLoading = false;
+                return;
+            }
+            if (res.data.Status === '200' && res.data.Data.CaddyId == null) {
+                this.dataLogin.numberSite++;
+                this.pickSite();
+                return;
+            }
+            if (res.data.Status === '200' && res.data.Data.CaddyId !== null) {
                 this.dataLogin.token = res.data.Data.AccessToken;
                 localStorage.setItem('AccessToken', this.dataLogin.token);
-                localStorage.setItem('SiteId', this.siteIdPick);
+                localStorage.setItem('SiteId', idSite);
                 localStorage.setItem('CaddyId', res.data.Data.CaddyId);
                 store.commit('STATES_LOGIN', true);
                 this.isShowLoading = !this.isShowLoading;
                 routes.push('/home');
+                return;
             }
         },
         

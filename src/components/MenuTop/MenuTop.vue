@@ -7,21 +7,21 @@
         <ul class="menu-top__list position-fixed bg-white list-unstyled">
             <li class="menu-top__list--item d-flex justify-content-start align-items-center">
                 <img alt="" class="item-avatar" src="@/assets/avatar-default.png"/>
-                <router-link to="/profile">{{ $t('profile') }}</router-link>
+                <router-link to="/profile">{{ $t('golf_webapp_caddy_profile') }}</router-link>
             </li>
-            <li class="menu-top__list--item d-flex justify-content-start"><i class="ezGolf-icon-home"></i><router-link to="/">{{ $t('home') }}</router-link></li>
-            <li class="menu-top__list--item d-flex justify-content-start"><i class="ezGolf-icon-star"></i><router-link to="/">{{ $t('customer_feedback') }}</router-link></li>
-            <li class="menu-top__list--item d-flex justify-content-start" @click="logOut"><i class="ezGolf-icon-log-out"></i><span>{{ $t('logout') }}</span></li>
+            <li class="menu-top__list--item d-flex justify-content-start"><i class="ezGolf-icon-home"></i><router-link to="/">{{ $t('golf_webapp_caddy_home') }}</router-link></li>
+            <li class="menu-top__list--item d-flex justify-content-start"><i class="ezGolf-icon-star"></i><router-link to="/">{{ $t('golf_webapp_caddy_customer_feedback') }}</router-link></li>
+            <li class="menu-top__list--item d-flex justify-content-start" @click="logOut"><i class="ezGolf-icon-log-out"></i><span>{{ $t('golf_webapp_caddy_logout') }}</span></li>
             
             <li class="menu-top__list--item m-0" @click="showModalPickSite">
                 <div class="my-4">
-                    <span class="font-weight-bold text-uppercase">{{ $t('pick_site_manage') }}:</span>
+                    <span class="font-weight-bold text-uppercase">{{ $t('golf_webapp_caddy_pick_site_manage') }}:</span>
                 </div>
                 <b-button variant="outline-secondary" class="h-auto">{{ dataPickMenuDropdown.SiteName }}</b-button>
             </li>
             <li class="menu-top__list--item m-0">
                 <div class="my-4">
-                    <span class="font-weight-bold text-uppercase">{{ $t('select_language') }}:</span>
+                    <span class="font-weight-bold text-uppercase">{{ $t('golf_webapp_caddy_select_language') }}:</span>
                 </div>
                 <b-button class="bg-white border border-white" @click="changeLanguage('vi')"><img src="@/assets/vi_vn.a0e23328.svg" alt=""></b-button>
                 <b-button class="bg-white border border-white" @click="changeLanguage('en')"><img src="@/assets/en_gb.b1303c78.svg" alt=""></b-button>
@@ -41,7 +41,7 @@
                     </b-dropdown-item>
                 </template>
             </ez-golf-dropdown>
-            <b-button variant="primary" class="text-uppercase w-100 mt-4" @click="acceptPickSiteName">{{ $t('accept') }}</b-button>
+            <b-button variant="primary" class="text-uppercase w-100 mt-4" @click="acceptPickSiteName">{{ $t('golf_webapp_caddy_accept') }}</b-button>
         </modal-box>
     </nav>
 </template>

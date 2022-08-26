@@ -4,7 +4,7 @@ import { searchListShift, fetchBookingDetailsId } from '@/api/service.js';
 import { 
     convertTimeToVn, 
     convertDateToVN 
-} from '@/helper/helper.js'
+} from '@/helper/helper.js';
 import EzDateRangePicker from '@/components/EzDateRangePicker/EzDateRangePicker.vue';
 import TableShift from '@/components/TableShift/TableShift.vue';
 import ModalBox from '@/components/ModalBox/ModalBox.vue';
@@ -95,27 +95,28 @@ export default {
         },
 
         async fetchIdBookingDetails(value) {
+            if(!value.bdc) {
+                return;
+            }
             const param = {
-                token: localStorage.getItem('AccessToken'),
-                Lang: '1000000',
-                BDC: value.bdc,
-                CaddyCalendarDetailId: value.idShift
+                'BDC': value.bdc,
+                'CaddyCalendarDetailId': value.idShift
             }
             const res = await fetchBookingDetailsId(param);
             return res.data.Data.BookingDetailId;
         },
 
         async pickValueDate(date) {
-            const accessToken = localStorage.getItem('AccessToken');
             this.dataDate = date;
             const param = {
-                Token: accessToken,
-                StartDate: this.dataDate.dateStart, 
-                EndDate: this.dataDate.dateEnd, 
-                Lang: '1000000',
+                'StartDate': this.dataDate.dateStart, 
+                'EndDate': this.dataDate.dateEnd, 
             }; 
             this.resetStatisticalShift();
             const res = await searchListShift(param);
+            if(res.data.Data === null) {
+                return;
+            }
             if (res.data.Status === '200') {
                 this.arrayDataList = [];
                 this.arrayDataList = [...res.data.Data.Shift];
@@ -138,17 +139,6 @@ export default {
             this.pickValueDate(this.dataDate);
         },
 
-        convertDate(value) {
-            const options = {year: 'numeric', month: 'numeric', day: 'numeric' };
-            const cusTomValue = new Date(value).toLocaleDateString('vi-VN', options)
-            return cusTomValue;
-        },
-
-        convertDateToVN(value) {
-            const date = new Date(value);
-            this.datePick = new Intl.DateTimeFormat("vi-VN").format(date);
-        },
-
         pickDataBdc(value) {
             this.dataInputBDC = { 
                 WorkingDay: value.WorkingDay, 
@@ -166,12 +156,15 @@ export default {
 
        async acceptData() {
             const param = {
-                token: this.dataInputBDC.Token,
-                Lang: '1000000',
-                BDC: this.dataInputBDC.BDC,
-                CaddyCalendarDetailId: this.dataInputBDC.CaddyCalendarDetailId
+                'BDC': this.dataInputBDC.BDC,
+                'CaddyCalendarDetailId': this.dataInputBDC.CaddyCalendarDetailId
             };
             const res = await fetchBookingDetailsId(param);
+            if (res.data.Status === '400') {
+                store.commit('STATES_MESSAGE_PERMISSION',  res.data.Messages[0].MessageText);
+                routes.push('/reject-access');
+                return;
+            }
             if(res.data.Data == null) {
                 routes.push('/reject');
             } else {

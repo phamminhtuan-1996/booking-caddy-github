@@ -18,7 +18,7 @@
     "node-sass": "^7.0.1",
     "push-fcm-plugin": "^0.0.2",
     "push.js": "^1.0.12",
-    "qrcode.vue": "^3.3.3",
+    "qrcode.vue": "^0.3.5",
     "qs": "^6.11.0",
     "register-service-worker": "^1.7.2",
     "vue": "^2.6.14",
