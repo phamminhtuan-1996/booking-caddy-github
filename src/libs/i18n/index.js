@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import { getTranslate, getLanguages } from '@/api/service.js';
+import store from '@/store/store.js';
 import en from './locales/en.json';
 import vi from './locales/vi.json';
 
@@ -39,6 +40,7 @@ async function fetchLanguages() {
 }
 
 export async function loadLocaleMessages() {
+  store.commit('STATES_LOADING', true);
   const translate = await fetchTranslate();
   const languages = await fetchLanguages();
   messages.vi = translate.toArrayResult[0];

@@ -7,8 +7,8 @@
             :isReport="true"
             :title="`Lỗi ${item.Field}`" 
             :contentDes="`Code: ${item.Code}, Messages: ${item.MessageText}`"
-            :class="{ 'remove': item.active }"
-            @click.native="copyCodeAndClose(item, index)"
+            :class="{ 'remove': index === indexTurnOff }"
+            @click.native="copyCodeAndClose(item.Code, index)"
         />
         <div class="d-none">
             {{ checkHasMess }}

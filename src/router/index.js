@@ -9,7 +9,6 @@ import QrScanner from '@/views/pages/QrScanner/QrScanner.vue';
 import ProfileCaddy from '@/views/pages/ProfileCaddy/ProfileCaddy.vue';
 import NofticationBooking from '@/views/pages/NofticationBooking/NofticationBooking.vue';
 import RejectPermission from '@/views/pages/RejectPermission/RejectPermission.vue';
-import { fetchSiteName } from '@/api/login.js';
 import { loadLocaleMessages } from '@/libs/i18n/index.js';
 
 Vue.use(Router)
@@ -59,23 +58,9 @@ const router = new Router({
   ],
 })
 
-async function checkHasLogin() {
-  const TokenRat01 = JSON.parse(localStorage.getItem('TOKEN_RAT01'));
-  if (TokenRat01 === null) {
-    return;
-  }
-  const param = {
-    'UserName': TokenRat01.username,
-  }
- 
-  const res = await fetchSiteName(param);
-  return res.data.Data;
-}
-
 router.beforeEach(async (to, from, next) => {
   loadLocaleMessages();
   store.commit('STATES_LOGIN', true);
-  const checkLogin = await checkHasLogin();
   if (to.name === 'LoginAuthentication') {
     store.commit('STATES_LOGIN', false);
     return next();
@@ -83,7 +68,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.name !== 'LoginAuthentication' && !localStorage.getItem('AccessToken')) {
     store.commit('STATES_LOGIN', false);
     return next({ name: 'LoginAuthentication' });
-  } else if(localStorage.getItem('AccessToken') && checkLogin !== null){
+  } else if(localStorage.getItem('AccessToken')){
     return next();
   }
 });

@@ -54,7 +54,7 @@
                     >
                         <i class="ezGolf-icon-plus-circle mr-2"></i> {{ $t('golf_webapp_caddy_add_bdc_code') }}
                     </b-button>
-                    <router-link  v-if="item.BDC" :to="'/sucess/'+item.idbookingDetails" class="btn btn-primary w-100 mt-3">{{ $t('golf_webapp_caddy_view_details') }}</router-link>
+                    <router-link  v-if="item.BDC" :to="'/sucess/'+item.BookingDetailId" class="btn btn-primary w-100 mt-3">{{ $t('golf_webapp_caddy_view_details') }}</router-link>
                 </b-col>
             </b-row>
         </b-collapse>

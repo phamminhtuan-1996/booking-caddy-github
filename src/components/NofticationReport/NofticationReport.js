@@ -10,6 +10,7 @@ export default {
             listDataNoftication: [],
             indexInterval: 0,
             startUpCloseReport: false,
+            indexTurnOff: -1,
         };
     },
     setup() {
@@ -21,13 +22,16 @@ export default {
         };
     },
     methods: {
-        copyCodeAndClose(value, index) {
-            navigator.clipboard.writeText(value.Code);
+       async copyCodeAndClose(value, index) {
+            navigator.clipboard.writeText(value);
             this.indexInterval = index;
             this.startUpCloseReport = true;
-            this.$set(this.listDataNoftication[index].active = true);
-            console.log('listDataNoftication in function click', index,  this.listDataNoftication[index].active);
-            this.listDataNoftication.splice(index, 1);
+            this.indexTurnOff = index;
+            setTimeout(() => {
+                this.listDataNoftication.splice(index, 1);
+                this.indexTurnOff = -1;
+            } , 500);
+
         },
 
     },
@@ -39,12 +43,15 @@ export default {
     watch: {
         checkHasMess: function (value) {
             this.listDataNoftication.push(value);
-            this.listDataNoftication.forEach((item) => {
-                if (!item.active) {
-                    item['active'] = false;
+            const startInterval = setInterval(async () => {
+                if (this.listDataNoftication.length <= 0) {
+                    clearInterval(startInterval);
+                    this.indexTurnOff = -1;
+                    return;
                 }
-            });
-            console.log('listDataNoftication has active', this.listDataNoftication);
+                this.indexTurnOff = this.listDataNoftication.length === 1 ? 0 : this.indexTurnOff++;
+                setTimeout(() => this.listDataNoftication.splice(this.indexTurnOff, 1), 500);
+            }, 5000);  
         },
     },
     

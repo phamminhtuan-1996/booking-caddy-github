@@ -125,8 +125,6 @@ export default {
                     item.StartTime = convertTimeToVn(item.StartTime).all;
                     item.EndTime = convertTimeToVn(item.EndTime).all;
                     item.CourseName = item.CourseName !== null ? item.CourseName.toString() : '';
-                    const idBooking = await this.fetchIdBookingDetails({bdc: item.BDC, idShift: item.Id});
-                    item['idbookingDetails'] = item.BDC ? idBooking : null;
                 });
                 this.statisticalShift();
                 store.commit('STATE_SHIFT', this.arrayDataList);

@@ -12,7 +12,8 @@ const store = new Vuex.Store({
         idInputAddBdc: 0,
         bookingDetailsId: 0,
         messageText: '',
-        nofticationReport: {}
+        nofticationReport: {},
+        loading: true,
       },
       mutations: {
         STATES_LOGIN(state, val) {
@@ -38,7 +39,11 @@ const store = new Vuex.Store({
         },
         STATES_MESSAGE_REPORT(state, val) {
           state.nofticationReport = val;
+        },
+        STATES_LOADING(state, val) {
+          state.loading = val;
         }
+        
       },
       getters: {
       },

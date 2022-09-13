@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NofticationReport/>
+    <LoadingBackground :isShowPopup="isShowLoading"></LoadingBackground>
     <menu-top v-if="stateLogin"></menu-top>
     <router-view></router-view>
     <navigation-bottom  v-if="stateLogin"></navigation-bottom>
@@ -12,6 +13,7 @@ import store from '@/store/store.js';
 import MenuTop from '@/components/MenuTop/MenuTop.vue';
 import NavigationBottom from '@/components/NavigationBottom/NavigationBottom.vue';
 import NofticationReport from '@/components/NofticationReport/NofticationReport.vue';
+import LoadingBackground from '@/components/LoadingBackground/LoadingBackground.vue';
 
 
 
@@ -21,6 +23,7 @@ export default {
     MenuTop,
     NavigationBottom,
     NofticationReport,
+    LoadingBackground,
   },
   data() {
     return {
@@ -38,6 +41,9 @@ export default {
     stateLogin() {
       return this.stores.state.login;
     },
+    isShowLoading() {
+      return this.stores.state.loading
+    }
 
   },
   mounted() {
